@@ -409,6 +409,12 @@ func doPreviewPuzzle(ctx *maa.Context, thumbX, thumbY int) *PuzzleDesc {
 	if previewImg == nil {
 		log.Error().Msg("Failed to capture preview image")
 		aw.TouchUpSync(0)
+
+		select {
+		case <-time.After(600 * time.Millisecond):
+			// 等待成功
+		}
+
 		return nil
 	}
 
